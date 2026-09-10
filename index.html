@@ -32,8 +32,8 @@
   </header>
 
   <section class="facts">
-    <div class="fact"><div class="ico">📅</div><div><strong>Datum / Date</strong><span>1st November</span></div></div>
-    <div class="fact"><div class="ico">🕚</div><div><strong>Zeit / Time</strong><span>12.00 to 16.00</span></div></div>
+    <div class="fact"><div class="ico">📅</div><div><strong>Datum / Date</strong><span>1. November 2026 / 1 November 2026</span></div></div>
+    <div class="fact"><div class="ico">🕚</div><div><strong>Zeit / Time</strong><span>12.00 - 16.00 Uhr / 12.00 - 16.00</span></div></div>
     <div class="fact"><div class="ico">👥</div><div><strong>Anmeldung / Registration</strong><span>Nur mit Voranmeldung / By prebooking only</span></div></div>
     <div class="fact"><div class="ico">📍</div><div><strong>Adresse / Address</strong><span>Chalet India<br>Oberdorfstrasse 51, 8810 Horgen</span></div></div>
   </section>
@@ -67,7 +67,7 @@
         </div>
         <p class="drink-note">Getränke sind nicht im Preis inbegriffen und auf eigene Kosten erhältlich. / Beverages are not included in the price and are available at an additional cost to the guests.</p>
         <div class="totals">
-          <div class="total-item"><span>👥 Teilnehmer gesamt / Total Attendees</span><strong id="totalPeople">0</strong></div>
+          <div class="total-item"><span>👥 Anzahl Personen / Number of people</span><strong id="totalPeople">0</strong></div>
           <div class="total-item"><span>Gesamtbetrag (CHF) / Total Amount (CHF)</span><strong id="totalAmount">CHF 0.00</strong></div>
         </div>
 
@@ -75,7 +75,7 @@
         <div class="mandatory-box">
           <label class="check"><input class="mandatory-check" name="allergyInsuranceResponsibility" type="checkbox" value="Yes" required><span>Die Verantwortung für die Berücksichtigung von Allergien, Unverträglichkeiten und besonderen Ernährungsbedürfnissen liegt bei den Gästen. Der Verkehrsverein übernimmt keine Verantwortung für den persönlichen Versicherungsschutz der Gäste und keine daraus entstehenden Kosten. / Guests are responsible for taking account of allergies, intolerances and special dietary requirements. The Verkehrsverein accepts no responsibility for guests’ personal insurance coverage or any resulting costs. <span class="req">*</span></span></label>
           <label class="check"><input class="mandatory-check" name="prebooking" type="checkbox" value="Yes" required><span>Ich bestätige, dass die Teilnahme nur mit Voranmeldung möglich ist. / I understand that registration is by prebooking only. <span class="req">*</span></span></label>
-          <label class="check"><input class="mandatory-check" name="payment" id="paymentConfirmed" type="checkbox" value="Yes" required><span><strong>Ich bestätige, dass ich die Zahlung über den QR-Code abgeschlossen habe. / I confirm that I have completed the payment using the QR code.</strong> <span class="req">*</span></span></label>
+          <label class="check"><input class="mandatory-check" name="payment" id="paymentConfirmed" type="checkbox" value="Yes" required><span><strong>Ich bestätige, dass ich die Zahlung über den QR-Code/IBAN abgeschlossen habe. / I confirm that I have completed the payment using the QR code/IBAN.</strong> <span class="req">*</span></span></label>
           <label class="check"><input class="mandatory-check" name="terms" type="checkbox" value="Yes" required><span>Ich bestätige, dass die oben genannten Angaben korrekt sind und akzeptiere die Veranstaltungsbedingungen. / I confirm that the information above is correct and agree to the event terms. <span class="req">*</span></span></label>
         </div>
         <button class="submit" id="submitBtn" type="submit" disabled>🪔 &nbsp; Anmeldung absenden / Submit Registration</button>
@@ -88,6 +88,18 @@
       <section class="panel">
         <div class="pay-title">🪔 ZAHLUNG / PAYMENT</div>
         <p>Bitte scannen Sie den QR-Code unten, um die Zahlung abzuschließen. / Please scan the QR Code below to complete your payment.</p>
+        <div class="payment-choice" style="margin:14px 0 16px;padding:14px 16px;border:1px solid #eadfd4;border-radius:10px;background:#fffaf5;">
+          <div style="font-weight:700;color:#4d1858;margin-bottom:9px;">Zahlungsart / Mode of payment <span class="req">*</span></div>
+          <div style="display:flex;gap:22px;flex-wrap:wrap;">
+            <label style="display:flex;align-items:center;gap:7px;font-weight:600;"><input type="radio" name="paymentMode" value="QR Code" required style="width:auto;"> QR-Code</label>
+            <label style="display:flex;align-items:center;gap:7px;font-weight:600;"><input type="radio" name="paymentMode" value="IBAN" required style="width:auto;"> IBAN</label>
+          </div>
+        </div>
+        <div class="iban-box" style="margin:0 0 16px;padding:14px 16px;border:1px solid #dfb767;border-radius:10px;background:#fffdf8;">
+          <div style="font-weight:700;color:#4d1858;margin-bottom:5px;">IBAN</div>
+          <div style="font-size:16px;font-weight:700;letter-spacing:.02em;">CH53 0682 4221 2669 2090 0</div>
+          <div style="margin-top:5px;font-size:13px;color:#756c73;">Verkehrsverein Horgen, 8810 Horgen</div>
+        </div>
         <div class="qr"><div><img src="assets/payment-qr.jpg" alt="Payment QR code"><div class="qr-note">Zum Bezahlen scannen / Scan to pay</div><div class="qr-help">Bitte schließen Sie die Zahlung ab, bevor Sie die Anmeldung absenden. / Please complete payment before submitting your registration.</div></div></div>
       </section>
       <section class="panel important">
@@ -109,6 +121,7 @@
   var totalAttendeesInput = document.getElementById('totalAttendeesInput');
   var totalAmountInput = document.getElementById('totalAmountInput');
   var paymentBox = document.getElementById('paymentConfirmed');
+  var paymentModeOptions = document.querySelectorAll('input[name="paymentMode"]');
   var mandatoryChecks = document.querySelectorAll('.mandatory-check');
   var fieldIds = ['members', 'nonMembers', 'kids2to10', 'kids12to16', 'above16'];
   var fields = [];
@@ -175,6 +188,13 @@
       statusEl.className = 'status';
       updateSubmitAvailability();
     };
+  }
+
+  function paymentModeSelected() {
+    for (var pm = 0; pm < paymentModeOptions.length; pm++) {
+      if (paymentModeOptions[pm].checked) return true;
+    }
+    return false;
   }
 
   function setSubmitting(isSubmitting) {
